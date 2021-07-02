@@ -1,6 +1,12 @@
-class DataBase(object):
+from random import random
+
+
+class Factory(object):
     class Dict(object):
         __memory = {}
+
+        def __init__(self):
+            self.__memory = {}
 
         def get(self, id):
             return self.__memory[id]
@@ -17,6 +23,9 @@ class DataBase(object):
 
     class List(object):
         __memory = []
+
+        def __init__(self):
+            self.__memory = []
 
         def get(self, id):
             item_index = self.__memory.index(id)
@@ -36,7 +45,7 @@ class DataBase(object):
                 return
             del self.__memory[item_index]
 
-    def init(self, target):
+    def initDB(self, target):
         if target == 'list':
             return self.List()
         if target == 'dict':
@@ -44,29 +53,30 @@ class DataBase(object):
         raise Exception("invalid db requested")
 
 
-DICT_DB = DataBase().init("dict")
+if __name__ == '__main__':
+    DICT_DB = Factory().initDB("dict")
 
-DICT_DB.set({
-    "id": "Seat",
-    "model": "Toledo",
-    "hp": 120,
-    "year": 2015
-})
-DICT_DB.set({
-    "id": "Opel",
-    "model": "Corsa",
-    "hp": 77,
-    "year": 2001
-})
+    DICT_DB.set({
+        "id": "Seat",
+        "model": "Toledo",
+        "hp": 120,
+        "year": 2015
+    })
+    DICT_DB.set({
+        "id": "Opel",
+        "model": "Corsa",
+        "hp": 77,
+        "year": 2001
+    })
 
-print(DICT_DB.get("opel"))
+    print(DICT_DB.get("opel"))
 
-LIST_DB = DataBase().init("list")
+    LIST_DB = Factory().initDB("list")
 
-LIST_DB.set("Neptun")
-LIST_DB.set("Uranus")
-LIST_DB.set("Alfa")
-print(LIST_DB.get_all())
+    LIST_DB.set("Neptun")
+    LIST_DB.set("Uranus")
+    LIST_DB.set("Alfa")
+    print(LIST_DB.get_all())
 
-LIST_DB.remove("Alfa")
-print(LIST_DB.get_all())
+    LIST_DB.remove("Alfa")
+    print(LIST_DB.get_all())
