@@ -1,9 +1,6 @@
-from random import random
-
-
 class Factory(object):
     class Dict(object):
-        __memory = {}
+        __memory = None
 
         def __init__(self):
             self.__memory = {}
@@ -22,7 +19,7 @@ class Factory(object):
             del self.__memory[id]
 
     class List(object):
-        __memory = []
+        __memory = None
 
         def __init__(self):
             self.__memory = []

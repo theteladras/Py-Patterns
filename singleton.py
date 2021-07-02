@@ -1,6 +1,5 @@
 from factory import Factory
 
-
 class Singleton(object):
     __memory = None
 
